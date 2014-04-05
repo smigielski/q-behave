@@ -1,0 +1,12 @@
+.build/libraries/q_learning/RestState.o: \
+  libraries/q_learning/RestState.cpp test/mock_arduino.h \
+  test/fake_serial.h libraries/q_learning/RestState.h \
+  libraries/q_learning/State.h
+
+test/mock_arduino.h:
+
+test/fake_serial.h:
+
+libraries/q_learning/RestState.h:
+
+libraries/q_learning/State.h:

@@ -1,0 +1,11 @@
+.build/libraries/q_learning/Brain.o: libraries/q_learning/Brain.cpp \
+  test/mock_arduino.h test/fake_serial.h libraries/q_learning/Brain.h \
+  libraries/q_learning/State.h
+
+test/mock_arduino.h:
+
+test/fake_serial.h:
+
+libraries/q_learning/Brain.h:
+
+libraries/q_learning/State.h:
