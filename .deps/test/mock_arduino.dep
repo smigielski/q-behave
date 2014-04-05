@@ -1,6 +1,0 @@
-.build/test/mock_arduino.o: test/mock_arduino.cpp test/mock_arduino.h \
-  test/fake_serial.h
-
-test/mock_arduino.h:
-
-test/fake_serial.h:

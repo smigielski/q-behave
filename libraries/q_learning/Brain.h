@@ -33,17 +33,21 @@ public:
 	Brain(State* _startState, StateMap _memory);
 	virtual ~Brain();
 	void start(int impulse);
-	void reward(int amount=100);
-	void punish(int amount=100);
-	void stop(int amount=10);
-private:
-	State* startState;
+	void stop(double amount);
 	State* currentState;
+private:
+	//learning rate
+	double alpha=0.1;
+	//future discount
+	double gamma =0.9;
+	State* startState;
+	Action* currentAction;
 	int memoryGraphNumber;
 	StateMap memory;
 	virtual void invokeNextAction();
-	virtual void loadMemmory(int graphNumber);
-	virtual State* getNextAction(State* currentState);
+	virtual void loadMemory(int graphNumber);
+	virtual Action* getNextAction(State* currentState);
+	double getMaxReward(State* currentState);
 	StateActions getStateActions(State* state);
 };
 

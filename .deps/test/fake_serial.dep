@@ -1,3 +1,0 @@
-.build/test/fake_serial.o: test/fake_serial.cpp test/fake_serial.h
-
-test/fake_serial.h:

@@ -1,7 +1,7 @@
 /*
- * RestState.cpp
+ * MockState.cpp
  *
- *  Created on: Apr 4, 2014
+ *  Created on: Apr 5, 2014
  *      Author: marek
  */
 #ifndef _TEST_
@@ -10,22 +10,23 @@
 #include "mock_arduino.h"
 #endif
 
-#include "RestState.h"
+#include "MockState.h"
 
 namespace q_learning {
 
-RestState::RestState() {
-
+MockState::MockState(char* _stateName) {
+	this->stateName=_stateName;
 }
 
-RestState::~RestState() {
+MockState::~MockState() {
+	// TODO Auto-generated destructor stub
 }
 
-char* RestState::getStateName(){
-	return "rest";
+char* MockState::getStateName(){
+	return this->stateName;
 }
 
-State* RestState::switchTo(State* state){
+State* MockState::switchTo(State* state){
 #ifdef _INFO_
 	char myConcatenation[80];
 	sprintf(myConcatenation,"[INFO] switch from state %s to state %s ",this->getStateName(),state->getStateName());
@@ -38,11 +39,11 @@ State* RestState::switchTo(State* state){
 	return state;
 }
 
-void RestState::activate(){
+void MockState::activate(){
 	//do nothing
 }
 
-void RestState::deactivate(){
+void MockState::deactivate(){
 	//do nothing
 }
 

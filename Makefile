@@ -3,7 +3,8 @@ SOURCES = test/runtests.cpp \
           test/mock_arduino.cpp \
           libraries/q_learning/Brain.cpp \
           libraries/q_learning/State.cpp \
-          libraries/q_learning/RestState.cpp
+          libraries/q_learning/RestState.cpp \
+          libraries/q_learning/MockState.cpp
 
 OBJECTS := $(addsuffix .o, $(addprefix .build/, $(basename $(SOURCES))))
 DEPFILES := $(subst .o,.dep, $(subst .build/,.deps/, $(OBJECTS)))
@@ -22,6 +23,6 @@ runtests: $(OBJECTS)
 	$(CC) $(OBJECTS) -lstdc++ -o $@
 
 clean:
-	@rm -rf .deps/ .build/ $(RUNTEST)
+	@rm -rf runtests .deps/ .build/ $(RUNTEST)
 
 -include $(DEPFILES)
