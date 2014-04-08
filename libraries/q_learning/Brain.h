@@ -9,6 +9,10 @@
 #ifndef BRAIN_H_
 #define BRAIN_H_
 
+#define _DEBUG_
+#define _INFO_
+#define _ERROR_
+
 namespace q_learning {
 
 struct Action {
@@ -37,9 +41,9 @@ public:
 	State* currentState;
 private:
 	//learning rate
-	double alpha=0.1;
+	const static double alpha = 0.1;
 	//future discount
-	double gamma =0.9;
+	const static double gamma = 0.9;
 	State* startState;
 	Action* currentAction;
 	int memoryGraphNumber;
