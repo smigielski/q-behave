@@ -24,7 +24,7 @@ StateActions states[3] = {
 };
 StateMap stateMap = { 3, states };
 
-int led = 9;
+
 //The setup function is called once at startup of the sketch
 void setup()
 {

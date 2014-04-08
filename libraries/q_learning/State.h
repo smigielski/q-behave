@@ -14,8 +14,8 @@ namespace q_learning {
 	public:
 		State();
 		virtual ~State();
+		State* switchTo(State* state);
 		virtual char* getStateName() = 0;
-		virtual State* switchTo(State* state) = 0;
 		virtual void activate() = 0;
 		virtual void deactivate() = 0;
 	};

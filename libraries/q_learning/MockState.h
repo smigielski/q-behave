@@ -14,14 +14,14 @@ namespace q_learning {
 
 class MockState: public q_learning::State {
 public:
-	MockState(char* stateName);
+	MockState(char* stateName,int* _state);
 	virtual ~MockState();
 	virtual char* getStateName();
-	virtual State* switchTo(State* state);
 	virtual void activate();
 	virtual void deactivate();
 private:
 	char* stateName;
+	int* state;
 };
 
 } /* namespace q_learning */

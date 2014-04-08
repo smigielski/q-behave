@@ -14,37 +14,26 @@
 
 namespace q_learning {
 
-MockState::MockState(char* _stateName) {
+MockState::MockState(char* _stateName,int* _state) {
 	this->stateName=_stateName;
+	this->state=_state;
 }
 
 MockState::~MockState() {
-	// TODO Auto-generated destructor stub
+
 }
 
 char* MockState::getStateName(){
 	return this->stateName;
 }
 
-State* MockState::switchTo(State* state){
-#ifdef _INFO_
-	char myConcatenation[80];
-	sprintf(myConcatenation,"[INFO] switch from state %s to state %s ",this->getStateName(),state->getStateName());
-	Serial.write(myConcatenation);
-#endif
-	if (this!=state){
-		this->deactivate();
-		state->activate();
-	}
-	return state;
-}
 
 void MockState::activate(){
-	//do nothing
+	*state =1;
 }
 
 void MockState::deactivate(){
-	//do nothing
+	*state =0;
 }
 
 } /* namespace q_learning */

@@ -20,7 +20,7 @@ Brain::Brain(State* _startState, StateMap _memory) {
 	this->memory = _memory;
 	memoryGraphNumber = 0;
 #ifdef _INFO_
-	Serial.write("[INFO] Brain created.");
+	Serial.println("[INFO] Brain created.");
 #endif
 }
 
@@ -29,13 +29,11 @@ Brain::~Brain() {
 
 void Brain::start(int impulse) {
 #ifdef _INFO_
-	char myConcatenation[80];
-	sprintf(myConcatenation,"[INFO] Starting activity for impulse: %i",impulse);
-	Serial.write(myConcatenation);
+	Serial.print("[INFO] Starting activity for impulse: ");Serial.println(impulse);
 #endif
 	//check current state and react if in the middle of activity
 	if (currentState != startState) {
-		stop(0);
+		stop(-5.0);
 	}
 	//find correct q-learning graph
 	if (memoryGraphNumber != impulse) {
@@ -49,35 +47,30 @@ void Brain::start(int impulse) {
 void Brain::stop(double amount) {
 
 #ifdef _INFO_
-	char myConcatenation[80];
-	sprintf(myConcatenation,"[INFO] Stopping activity, reward: %f",amount);
-	Serial.write(myConcatenation);
+	Serial.print("[INFO] Stopping activity, reward: ");Serial.println(amount);
 #endif
 
 	currentAction->quality = currentAction->quality
 			+ alpha
 					* (amount + gamma * getMaxReward(currentAction->state)
 							- currentAction->quality);
-	this->currentState = this->startState;
+	currentState = currentState->switchTo(this->startState);
 #ifdef _DEBUG_
-	sprintf(myConcatenation,"[INFO] New reward for state: %s is %f",currentAction->state->getStateName(),currentAction->quality);
-	Serial.write(myConcatenation);
+	Serial.print("[INFO] New reward for state: ");Serial.print(currentAction->state->getStateName());Serial.print(" is ");Serial.println("currentAction->quality");
 #endif
 }
 
 void Brain::loadMemory(int memoryNumber) {
 
 #ifdef _INFO_
-	char myConcatenation[80];
-	sprintf(myConcatenation,"[INFO] Loading memory: %i",memoryNumber);
-	Serial.write(myConcatenation);
+	Serial.print("[INFO] Loading memory: ");Serial.println(memoryNumber);
 #endif
 	//TODO load memory
 }
 
 void Brain::invokeNextAction() {
 #ifdef _INFO_
-	Serial.write("[INFO] Invoking next action");
+	Serial.println("[INFO] Invoking next action");
 #endif
 	currentAction = getNextAction(currentState);
 	currentState = currentState->switchTo(currentAction->state);
@@ -85,7 +78,7 @@ void Brain::invokeNextAction() {
 
 Action* Brain::getNextAction(State* currentState) {
 #ifdef _DEBUG_
-	Serial.write("[DEBUG] Get next action");
+	Serial.println("[DEBUG] Get next action");
 #endif
 	StateActions stateActions = getStateActions(currentState);
 	double maxQuality = stateActions.actions[0].quality;
@@ -97,9 +90,7 @@ Action* Brain::getNextAction(State* currentState) {
 		}
 	}
 #ifdef _DEBUG_
-	char myConcatenation[80];
-	sprintf(myConcatenation,"[DEBUG] Returning action leading to: %s (%f)",nextAction->state->getStateName(),maxQuality);
-	Serial.write(myConcatenation);
+	Serial.print("[DEBUG] Returning action leading to: ");Serial.print(nextAction->state->getStateName());Serial.print(" (");Serial.print(maxQuality);Serial.println(")");
 #endif
 	return nextAction;
 }
@@ -115,18 +106,14 @@ double Brain::getMaxReward(State* state) {
 		}
 	}
 #ifdef _DEBUG_
-	char myConcatenation[80];
-	sprintf(myConcatenation,"[DEBUG] Returning future max reward for state %s (%f)",nextAction.state->getStateName(),maxQuality);
-	Serial.write(myConcatenation);
+	Serial.print("[DEBUG] Returning future max reward for state ");Serial.print(nextAction.state->getStateName());Serial.print(" (");Serial.print("maxQuality");Serial.println(")");
 #endif
 	return maxQuality;
 }
 
 StateActions Brain::getStateActions(State* state) {
 #ifdef _DEBUG_
-	char myConcatenation[80];
-	sprintf(myConcatenation,"[DEBUG] Get state actions for state:  %s",state->getStateName());
-	Serial.write(myConcatenation);
+	Serial.print("[DEBUG] Get state actions for state: ");Serial.println(state->getStateName());
 #endif
 	for (int i = 0; i < memory.stateCount; i++) {
 		if (memory.states[i].state == state) {
@@ -134,7 +121,7 @@ StateActions Brain::getStateActions(State* state) {
 		}
 	}
 #ifdef _ERROR_
-	Serial.write("[ERROR] No state action found. Wrong configuration");
+	Serial.println("[ERROR] No state action found. Wrong configuration");
 #endif
 }
 

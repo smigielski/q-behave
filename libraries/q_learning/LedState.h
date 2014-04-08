@@ -14,8 +14,14 @@ namespace q_learning {
 
 class LedState: public q_learning::State {
 public:
-	LedState();
+	LedState(char* _stateName,int pinNumber);
 	virtual ~LedState();
+	virtual char* getStateName();
+	virtual void activate();
+	virtual void deactivate();
+private:
+	char* stateName;
+	int pin;
 };
 
 } /* namespace q_learning */

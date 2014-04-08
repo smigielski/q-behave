@@ -17,7 +17,6 @@ public:
 	RestState();
 	virtual ~RestState();
 	virtual char* getStateName();
-	virtual State* switchTo(State* state);
 	virtual void activate();
 	virtual void deactivate();
 };
