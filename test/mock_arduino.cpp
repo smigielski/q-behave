@@ -20,6 +20,7 @@
 
 #include <sys/timeb.h>
 #include "mock_arduino.h"
+#include "stdlib.h"
 
 timeb t_start;
 unsigned long millis() {
@@ -35,4 +36,12 @@ void delay(unsigned long ms) {
 
 void initialize_mock_arduino() {
   ftime(&t_start);
+}
+
+long random(long howbig)
+{
+  if (howbig == 0) {
+    return 0;
+  }
+  return random() % howbig;
 }

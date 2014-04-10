@@ -19,11 +19,13 @@ public:
 private:
 	double learningRate;
 	double discountRate;
+	double randomizationTemperature;
 
 	virtual Action* getNextAction(StateActions stateActions);
 	virtual double getUpdatedQuality(double amount, double quality, State* state);
 
 	double getMaxReward(State* currentState);
+	double calculateExp(double q);
 
 };
 

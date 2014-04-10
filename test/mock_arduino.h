@@ -35,4 +35,6 @@ long map(long, long, long, long, long);
 
 void initialize_mock_arduino(); 
 
+long random(long howbig);
+
 #include "fake_serial.h"
