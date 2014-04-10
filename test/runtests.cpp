@@ -19,7 +19,7 @@
  */
 
 #include "mock_arduino.h"
-#include "../libraries/q_learning/Brain.h"
+#include "../libraries/q_learning/QLearningMachine.h"
 #include "../libraries/q_learning/RestState.h"
 #include "../libraries/q_learning/MockState.h"
 #include <string.h>
@@ -47,7 +47,7 @@ StateMap stateMap = { 3, states };
 
 
 
-void testMock2(Brain brain){
+void testMock2(StateController& brain){
 
 	int success1=0;
 	int count1 = 0;
@@ -58,7 +58,6 @@ void testMock2(Brain brain){
 			brain.stop(10.0);
 			success1++;
 		} else {
-			brain.stop(-10.0);
 			success1=0;
 		}
 	}
@@ -79,7 +78,7 @@ void testMock2(Brain brain){
 
 }
 
-void testMock1(Brain brain){
+void testMock1(StateController& brain){
 
 	int success1=0;
 		int count1 = 0;
@@ -90,7 +89,6 @@ void testMock1(Brain brain){
 				brain.stop(10.0);
 				success1++;
 			} else {
-				brain.stop(-10.0);
 				success1=0;
 			}
 		}
@@ -133,7 +131,7 @@ void testMock1(Brain brain){
 
 }
 
-void testMock2and1(Brain brain){
+void testMock2and1(StateController& brain){
 
 	int success1=0;
 		int count1 = 0;
@@ -144,7 +142,6 @@ void testMock2and1(Brain brain){
 				brain.stop(10.0);
 				success1++;
 			} else {
-				brain.stop(-10.0);
 				success1=0;
 			}
 		}
@@ -166,7 +163,6 @@ void testMock2and1(Brain brain){
 			brain.stop(10.0);
 			success2++;
 		} else {
-			brain.stop(-10.0);
 			success2=0;
 		}
 	}
@@ -200,11 +196,16 @@ void testMock2and1(Brain brain){
 
 }
 int main(int argc, char **argv) {
-	Brain brain = Brain(&restState, stateMap);
+	QLearningMachine brain = QLearningMachine(&restState, stateMap);
 	//test simple learning
 	testMock2(brain);
 	//test learning second thing after learning one
 	testMock1(brain);
+
+	QLearningMachine brain2 = QLearningMachine(&restState, stateMap, 0.0);
+
+	testMock2(brain2);
+
 	//test learning two things at the same time
 	testMock2and1(brain);
 

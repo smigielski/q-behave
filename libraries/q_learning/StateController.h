@@ -6,8 +6,8 @@
  */
 #include "State.h"
 
-#ifndef BRAIN_H_
-#define BRAIN_H_
+#ifndef STATECONTROLLER_H_
+#define STATECONTROLLER_H_
 
 #define _DEBUG_
 #define _INFO_
@@ -32,29 +32,26 @@ struct StateMap {
 };
 
 
-class Brain {
+class StateController {
 public:
-	Brain(State* _startState, StateMap _memory);
-	virtual ~Brain();
+	StateController(State* _startState, StateMap _memory, double _restartPenalty=-5.0);
+	virtual ~StateController();
 	void start(int impulse);
 	void stop(double amount);
+	StateActions getStateActions(State* state);
 	State* currentState;
 private:
-	//learning rate
-	const static double alpha = 0.1;
-	//future discount
-	const static double gamma = 0.9;
+	double restartPenalty;
 	State* startState;
 	Action* currentAction;
 	int memoryGraphNumber;
 	StateMap memory;
 	virtual void invokeNextAction();
 	virtual void loadMemory(int graphNumber);
-	virtual Action* getNextAction(State* currentState);
-	double getMaxReward(State* currentState);
-	StateActions getStateActions(State* state);
+	virtual Action* getNextAction(StateActions stateActions) = 0;
+	virtual double getUpdatedQuality(double amount, double quality, State* state)=0;
 };
 
 } /* namespace q_learning */
 
-#endif /* BRAIN_H_ */
+#endif /* STATECONTROLLER_H_ */

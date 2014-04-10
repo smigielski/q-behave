@@ -1,7 +1,8 @@
 SOURCES = test/runtests.cpp \
           test/fake_serial.cpp \
           test/mock_arduino.cpp \
-          libraries/q_learning/Brain.cpp \
+          libraries/q_learning/StateController.cpp \
+          libraries/q_learning/QLearningMachine.cpp \
           libraries/q_learning/State.cpp \
           libraries/q_learning/RestState.cpp \
           libraries/q_learning/MockState.cpp

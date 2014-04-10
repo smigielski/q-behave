@@ -3,9 +3,9 @@
 #define _INfO_
 
 #include "q_learning.h"
-#include "./libraries/q_learning/Brain.h"
+#include "./libraries/q_learning/StateController.h"
 #include "./libraries/q_learning/RestState.h"
-#include "../libraries/q_learning/MockState.h"
+#include "./libraries/q_learning/MockState.h"
 
 using namespace q_learning;
 
@@ -29,7 +29,7 @@ StateMap stateMap = { 3, states };
 void setup()
 {
 	  pinMode(led, OUTPUT);
-	Brain brain = Brain(&restState, stateMap);
+	StateController brain = StateController(&restState, stateMap);
 	//learn mock2
 	int success1=0;
 	int count1 = 0;
