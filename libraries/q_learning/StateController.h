@@ -4,32 +4,19 @@
  *  Created on: Apr 4, 2014
  *      Author: marek
  */
-#include "State.h"
+
 
 #ifndef STATECONTROLLER_H_
 #define STATECONTROLLER_H_
+
+#include "State.h"
+#include "Memory.h"
 
 #define _DEBUG_
 #define _INFO_
 #define _ERROR_
 
 namespace q_learning {
-
-struct Action {
-  State* state;
-  double quality;
-};
-
-struct StateActions {
-	State* state;
-	int actionCount;
-	Action* actions;
-};
-
-struct StateMap {
-	int stateCount;
-	StateActions* states;
-};
 
 
 class StateController {
@@ -45,6 +32,7 @@ private:
 	State* startState;
 	Action* currentAction;
 	int memoryGraphNumber;
+	Memory memoryMangger;
 	StateMap memory;
 	virtual void invokeNextAction();
 	virtual void loadMemory(int graphNumber);

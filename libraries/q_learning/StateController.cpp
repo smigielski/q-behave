@@ -14,11 +14,11 @@
 
 namespace q_learning {
 
-StateController::StateController(State* _startState, StateMap _memory, double _restartPenalty) {
+StateController::StateController(State* _startState, StateMap _memory, double _restartPenalty) : memoryMangger(_memory){
 	this->startState = _startState;
 	this->currentState = _startState;
-	this->memory = _memory;
 	this->memoryGraphNumber = 0;
+	this->memory=memoryMangger.getMemory(memoryGraphNumber);
 
 	this->restartPenalty=_restartPenalty;
 
@@ -28,6 +28,7 @@ StateController::StateController(State* _startState, StateMap _memory, double _r
 }
 
 StateController::~StateController() {
+
 }
 
 void StateController::start(int impulse) {
@@ -36,12 +37,14 @@ void StateController::start(int impulse) {
 #endif
 	//check current state and react if in the middle of activity
 	if (currentState != startState) {
-		stop(restartPenalty);
+		if (memoryGraphNumber != impulse) {
+			stop(0);
+			loadMemory(impulse);
+		} else {
+			stop(restartPenalty);
+		}
 	}
-	//find correct q-learning graph
-	if (memoryGraphNumber != impulse) {
-		loadMemory(impulse);
-	}
+
 	//choose action
 	invokeNextAction();
 
@@ -61,14 +64,13 @@ void StateController::stop(double amount) {
 }
 
 
-
 void StateController::loadMemory(int memoryNumber) {
 
 #ifdef _INFO_
 	Serial.print("[INFO] Loading memory: ");Serial.println(memoryNumber);
 #endif
-	//TODO load memory
-
+	memory = memoryMangger.getMemory(memoryNumber);
+	memoryGraphNumber=memoryNumber;
 }
 
 void StateController::invokeNextAction() {

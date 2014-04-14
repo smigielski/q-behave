@@ -45,7 +45,6 @@ Action* QLearningMachine::getNextAction(StateActions stateActions) {
 		maxQuality = calculateExp(stateActions.actions[i].quality)/sigma*100;
 		sum+= maxQuality;
 		i++;
-		Serial.print(sigma);
 	}
 #ifdef _DEBUG_
 	Serial.print("[DEBUG] Returning action leading to: ");Serial.print(nextAction->state->getStateName());Serial.print(" (");Serial.print(maxQuality);Serial.println(")");
