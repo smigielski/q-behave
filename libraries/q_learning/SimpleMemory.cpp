@@ -26,21 +26,33 @@
 #include "mock_arduino.h"
 #endif
 
-#include "MockState.h"
+#include "SimpleMemory.h"
 
 namespace q_learning {
 
-MockState::MockState(char* _stateName, int* _state) :
-		State(_stateName) {
-	this->state = _state;
+SimpleMemory::SimpleMemory(StateMap _stateMap, double* _internalMemmory[]) : Memory(_stateMap) {
+	this->internalMemmory=_internalMemmory;
+
 }
 
-void MockState::activate() {
-	*state = 1;
+void SimpleMemory::storeInternal(int memoryNumber) {
+	int position = 0;
+	for (int i = 0; i < stateMap.stateCount; i++) {
+		for (int j = 0; j < stateMap.states[i].actionCount; j++) {
+			internalMemmory[memoryNumber][position++] =
+					stateMap.states[i].actions[j].quality;
+		}
+	}
 }
 
-void MockState::deactivate() {
-	*state = 0;
+void SimpleMemory::loadInternal(int memoryNumber) {
+	int position = 0;
+	for (int i = 0; i < stateMap.stateCount; i++) {
+		for (int j = 0; j < stateMap.states[i].actionCount; j++) {
+			stateMap.states[i].actions[j].quality =
+					internalMemmory[memoryNumber][position++];
+		}
+	}
 }
 
 } /* namespace q_learning */

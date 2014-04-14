@@ -1,9 +1,25 @@
 /*
- * State.cpp
+ * State machine with learning capabilities.
  *
- *  Created on: Apr 4, 2014
- *      Author: marek
+ * Copyright (C) 2014 Poliprojekt.pl sp. z o.o.
+ * Author: Marek Smigielski <marek.smigielski@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
  */
+
 #ifndef _TEST_
 #include <Arduino.h>
 #else
@@ -14,19 +30,19 @@
 
 namespace q_learning {
 
-State::State() {
-
+State::State(char* _stateName) {
+	this->stateName = _stateName;
 }
 
-State::~State() {
-
+char* State::getStateName() {
+	return this->stateName;
 }
 
-State* State::switchTo(State* state){
+State* State::switchTo(State* state) {
 #ifdef _INFO_
 	Serial.print("[INFO] switch from state ");Serial.print(this->getStateName());Serial.print(" to state ");Serial.println(state->getStateName());
 #endif
-	if (this!=state){
+	if (this != state) {
 		this->deactivate();
 		state->activate();
 	}

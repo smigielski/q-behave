@@ -5,6 +5,7 @@ SOURCES = test/runtests.cpp \
           libraries/q_learning/QLearningMachine.cpp \
           libraries/q_learning/State.cpp \
           libraries/q_learning/Memory.cpp \
+          libraries/q_learning/SimpleMemory.cpp \
           libraries/q_learning/RestState.cpp \
           libraries/q_learning/MockState.cpp
 

@@ -1,9 +1,25 @@
 /*
- * Brain.h
+ * State machine with learning capabilities.
  *
- *  Created on: Apr 4, 2014
- *      Author: marek
+ * Copyright (C) 2014 Poliprojekt.pl sp. z o.o.
+ * Author: Marek Smigielski <marek.smigielski@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
  */
+
 
 
 #ifndef STATECONTROLLER_H_
@@ -18,21 +34,23 @@
 
 namespace q_learning {
 
-
+/**
+ * Main class controlling state machine and actions between them.
+ */
 class StateController {
 public:
-	StateController(Memory* _memory, double _restartPenalty=-5.0);
-	virtual ~StateController();
+	StateController(Memory* _memory);
+
+
 	void start(int impulse, State* startState);
 	virtual void invokeNextAction();
 	void stop(double amount);
-	State* currentState = 0;
-	Memory* memory = 0;
+
+	Memory* memory;
+	State* currentState;
+	Action* currentAction;
+
 private:
-	double restartPenalty;
-	Action* currentAction = 0;
-
-
 	virtual Action* getNextAction(StateActions stateActions) = 0;
 	virtual double getUpdatedQuality(double amount, double quality, State* state)=0;
 };

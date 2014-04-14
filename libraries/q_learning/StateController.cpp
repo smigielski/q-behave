@@ -1,9 +1,25 @@
 /*
- * Brain.cpp
+ * State machine with learning capabilities.
  *
- *  Created on: Apr 4, 2014
- *      Author: marek
+ * Copyright (C) 2014 Poliprojekt.pl sp. z o.o.
+ * Author: Marek Smigielski <marek.smigielski@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
  */
+
 #ifndef _TEST_
 #include <Arduino.h>
 #else
@@ -14,16 +30,13 @@
 
 namespace q_learning {
 
-StateController::StateController(Memory* _memory, double _restartPenalty) {
+StateController::StateController(Memory* _memory) {
 	this->memory = _memory;
-	this->restartPenalty = _restartPenalty;
+	this->currentState = 0;
+	this->currentAction = 0;
 #ifdef _INFO_
 	Serial.println("[INFO] Brain created.");
 #endif
-}
-
-StateController::~StateController() {
-
 }
 
 void StateController::start(int impulse, State* startState) {
@@ -36,8 +49,8 @@ void StateController::start(int impulse, State* startState) {
 	memory->loadMemory(impulse);
 
 	if (currentState != 0 && currentState != startState) {
-			stop(0);
-			currentState = currentState->switchTo(startState);
+		stop(0);
+		currentState = currentState->switchTo(startState);
 	} else {
 		currentState = startState;
 	}

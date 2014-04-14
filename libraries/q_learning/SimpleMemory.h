@@ -20,27 +20,25 @@
  *
  */
 
-#ifndef _TEST_
-#include <Arduino.h>
-#else
-#include "mock_arduino.h"
-#endif
+#ifndef SIMPLEMEMORY_H_
+#define SIMPLEMEMORY_H_
 
-#include "MockState.h"
+#include "Memory.h"
 
 namespace q_learning {
 
-MockState::MockState(char* _stateName, int* _state) :
-		State(_stateName) {
-	this->state = _state;
-}
-
-void MockState::activate() {
-	*state = 1;
-}
-
-void MockState::deactivate() {
-	*state = 0;
-}
+/**
+ * Simple memory that retrieves and store state quantity in internal preallocated memory.
+ */
+class SimpleMemory: public Memory {
+public:
+	SimpleMemory(StateMap _stateMap, double* _internalMemmory[]);
+private:
+	virtual void storeInternal(int memoryNumber);
+	virtual void loadInternal(int memoryNumber);
+	double** internalMemmory;
+};
 
 } /* namespace q_learning */
+
+#endif /* SIMPLEMEMORY_H_ */
