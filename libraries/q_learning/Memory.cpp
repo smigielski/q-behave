@@ -33,6 +33,20 @@ Memory::~Memory() {
 	}
 }
 
+StateActions Memory::getStateActions(State* state) {
+#ifdef _DEBUG_
+	Serial.print("[DEBUG] Get state actions for state: ");Serial.println(state->getStateName());
+#endif
+	for (int i = 0; i < memory.stateCount; i++) {
+		if (memory.states[i].state == state) {
+			return memory.states[i];
+		}
+	}
+#ifdef _ERROR_
+	Serial.println("[ERROR] No state action found. Wrong configuration");
+#endif
+}
+
 StateMap& Memory::getMemory(int memoryNumber){
 	Segment* next = this->firstSegment;
 	while (next->next != 0 && next->memoryNumber!=memoryNumber){

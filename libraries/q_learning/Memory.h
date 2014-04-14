@@ -38,7 +38,9 @@ class Memory {
 public:
 	Memory(StateMap main);
 	virtual ~Memory();
-	StateMap& getMemory(int memoryNumber);
+
+	StateActions getStateActions(State* state);
+	bool loadMemory(int memoryNumber);
 private:
 	Segment* firstSegment;
 };

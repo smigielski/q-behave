@@ -52,7 +52,7 @@ void testMock2(StateController& brain){
 	int success1=0;
 	int count1 = 0;
 	while (success1<5&&count1<1000) {
-		brain.start(0);
+		brain.start(0,&restState);
 		count1++;
 		if (brain.currentState == &mock2) {
 			brain.stop(10.0);
@@ -61,7 +61,7 @@ void testMock2(StateController& brain){
 			success1=0;
 		}
 	}
-	brain.start(0);
+	brain.start(0,&restState);
 	if (mock1state!=0||mock2state!=1){
 #ifdef _ERROR_
 		Serial.print("[ERROR] Mock2 should be learned! Mock1: ");Serial.print(mock1state);Serial.print(" Mock2: ");Serial.println(mock2state);
@@ -83,7 +83,7 @@ void testMock1(StateController& brain){
 	int success1=0;
 		int count1 = 0;
 		while (success1<5&&count1<1000) {
-			brain.start(0);
+			brain.start(0,&restState);
 			count1++;
 			if (brain.currentState == &mock2) {
 				brain.stop(10.0);
@@ -92,7 +92,7 @@ void testMock1(StateController& brain){
 				success1=0;
 			}
 		}
-		brain.start(0);
+		brain.start(0,&restState);
 		if (mock1state!=0||mock2state!=1){
 	#ifdef _ERROR_
 			Serial.print("[ERROR] Mock2 should be learned! Mock1: ");Serial.print(mock1state);Serial.print(" Mock2: ");Serial.println(mock2state);
@@ -104,7 +104,7 @@ void testMock1(StateController& brain){
 	int success2=0;
 	int count2 = 0;
 	while (success2<5&&count2<1000) {
-		brain.start(0);
+		brain.start(0,&restState);
 		count2++;
 		if (brain.currentState == &mock1) {
 			brain.stop(10.0);
@@ -114,7 +114,7 @@ void testMock1(StateController& brain){
 			success2=0;
 		}
 	}
-	brain.start(0);
+	brain.start(0,&restState);
 	if (mock1state!=1||mock2state!=0){
 #ifdef _ERROR_
 		Serial.print("[ERROR] Mock1 should be learned! Mock1: ");Serial.print(mock1state);Serial.print(" Mock2: ");Serial.println(mock2state);
@@ -136,7 +136,7 @@ void testMock2and1(StateController& brain){
 	int success1=0;
 		int count1 = 0;
 		while (success1<5&&count1<1000) {
-			brain.start(1);
+			brain.start(1,&restState);
 			count1++;
 			if (brain.currentState == &mock2) {
 				brain.stop(10.0);
@@ -145,7 +145,7 @@ void testMock2and1(StateController& brain){
 				success1=0;
 			}
 		}
-		brain.start(1);
+		brain.start(1,&restState);
 		if (mock1state!=0||mock2state!=1){
 	#ifdef _ERROR_
 			Serial.print("[ERROR] Mock2 should be learned! Mock1: ");Serial.print(mock1state);Serial.print(" Mock2: ");Serial.println(mock2state);
@@ -157,7 +157,7 @@ void testMock2and1(StateController& brain){
 	int success2=0;
 	int count2 = 0;
 	while (success2<5&&count2<1000) {
-		brain.start(2);
+		brain.start(2,&restState);
 		count2++;
 		if (brain.currentState == &mock1) {
 			brain.stop(10.0);
@@ -168,7 +168,7 @@ void testMock2and1(StateController& brain){
 	}
 
 	//Check that 0 memory holds mock1 state
-	brain.start(1);
+	brain.start(1,&restState);
 	if (mock1state!=0||mock2state!=1){
 #ifdef _ERROR_
 		Serial.print("[ERROR] For 0 memory bank Mock2 should be learned! Mock1: ");Serial.print(mock1state);Serial.print(" Mock2: ");Serial.println(mock2state);
@@ -178,7 +178,7 @@ void testMock2and1(StateController& brain){
 	brain.stop(10.0);
 
 	//Check that 1 memory holds mock2 state
-	brain.start(2);
+	brain.start(2,&restState);
 	if (mock1state!=1||mock2state!=0){
 #ifdef _ERROR_
 		Serial.print("[ERROR] For 1 memory bank Mock1 should be learned! Mock1: ");Serial.print(mock1state);Serial.print(" Mock2: ");Serial.println(mock2state);

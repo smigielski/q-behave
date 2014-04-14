@@ -14,14 +14,9 @@
 
 namespace q_learning {
 
-StateController::StateController(State* _startState, StateMap _memory, double _restartPenalty) : memoryMangger(_memory){
-	this->startState = _startState;
-	this->currentState = _startState;
-	this->memoryGraphNumber = 0;
-	this->memory=memoryMangger.getMemory(memoryGraphNumber);
-
+StateController::StateController(Memory _memory, double _restartPenalty){
+	this->memory=_memory;
 	this->restartPenalty=_restartPenalty;
-
 #ifdef _INFO_
 	Serial.println("[INFO] Brain created.");
 #endif
@@ -31,18 +26,19 @@ StateController::~StateController() {
 
 }
 
-void StateController::start(int impulse) {
+void StateController::start(int impulse,State* startState) {
 #ifdef _INFO_
 	Serial.print("[INFO] Starting activity for impulse: ");Serial.println(impulse);
 #endif
 	//check current state and react if in the middle of activity
 	if (currentState != startState) {
-		if (memoryGraphNumber != impulse) {
-			stop(0);
-			loadMemory(impulse);
-		} else {
+		if (memory.loadMemory(impulse)) {
 			stop(restartPenalty);
+		} else {
+			stop(0);
 		}
+
+		currentState = currentState->switchTo(startState);
 	}
 
 	//choose action
@@ -55,47 +51,24 @@ void StateController::stop(double amount) {
 #ifdef _INFO_
 	Serial.print("[INFO] Stopping activity, reward: ");Serial.println(amount);
 #endif
-
 	currentAction->quality = getUpdatedQuality(amount, currentAction->quality,currentAction->state);
-	currentState = currentState->switchTo(this->startState);
 #ifdef _DEBUG_
 	Serial.print("[INFO] New reward for state: ");Serial.print(currentAction->state->getStateName());Serial.print(" is ");Serial.println("currentAction->quality");
 #endif
 }
 
 
-void StateController::loadMemory(int memoryNumber) {
-
-#ifdef _INFO_
-	Serial.print("[INFO] Loading memory: ");Serial.println(memoryNumber);
-#endif
-	memory = memoryMangger.getMemory(memoryNumber);
-	memoryGraphNumber=memoryNumber;
-}
-
 void StateController::invokeNextAction() {
 #ifdef _INFO_
 	Serial.println("[INFO] Invoking next action");
 #endif
-	StateActions stateActions = getStateActions(currentState);
+	StateActions stateActions = memory.getStateActions(currentState);
 	currentAction = getNextAction(stateActions);
 	currentState = currentState->switchTo(currentAction->state);
 }
 
 
 
-StateActions StateController::getStateActions(State* state) {
-#ifdef _DEBUG_
-	Serial.print("[DEBUG] Get state actions for state: ");Serial.println(state->getStateName());
-#endif
-	for (int i = 0; i < memory.stateCount; i++) {
-		if (memory.states[i].state == state) {
-			return memory.states[i];
-		}
-	}
-#ifdef _ERROR_
-	Serial.println("[ERROR] No state action found. Wrong configuration");
-#endif
-}
+
 
 } /* namespace q_learning */

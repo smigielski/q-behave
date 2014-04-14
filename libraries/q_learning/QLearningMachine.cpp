@@ -14,7 +14,7 @@
 
 namespace q_learning {
 
-QLearningMachine::QLearningMachine(State* _startState, StateMap _memory, double _restartPenalty) : StateController(_startState,  _memory,  _restartPenalty){
+QLearningMachine::QLearningMachine(Memory _memory, double _restartPenalty) : StateController(_memory,  _restartPenalty){
 	//learning definition
 	this->learningRate=0.1;
 	this->discountRate=0.9;
@@ -67,7 +67,7 @@ double QLearningMachine::getUpdatedQuality(double amount, double quality, State*
 }
 
 double QLearningMachine::getMaxReward(State* state) {
-	StateActions stateActions = getStateActions(state);
+	StateActions stateActions = memory.getStateActions(state);
 	double maxQuality = stateActions.actions[0].quality;
 	Action nextAction = stateActions.actions[0];
 	for (int i = 0; i < stateActions.actionCount; i++) {
