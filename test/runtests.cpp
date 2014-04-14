@@ -45,6 +45,8 @@ StateActions states[] = {
 };
 StateMap stateMap = { 3, states };
 
+double prob1[4],prob2[4],prob3[4];
+double* internalMemmory[]={prob1,prob2,prob3};
 
 
 void testMock2(StateController& brain){
@@ -171,7 +173,7 @@ void testMock2and1(StateController& brain){
 	brain.start(1,&restState);
 	if (mock1state!=0||mock2state!=1){
 #ifdef _ERROR_
-		Serial.print("[ERROR] For 0 memory bank Mock2 should be learned! Mock1: ");Serial.print(mock1state);Serial.print(" Mock2: ");Serial.println(mock2state);
+		Serial.print("[ERROR] For 1 memory bank Mock2 should be learned! Mock1: ");Serial.print(mock1state);Serial.print(" Mock2: ");Serial.println(mock2state);
 		exit (1);
 #endif
 	}
@@ -181,7 +183,7 @@ void testMock2and1(StateController& brain){
 	brain.start(2,&restState);
 	if (mock1state!=1||mock2state!=0){
 #ifdef _ERROR_
-		Serial.print("[ERROR] For 1 memory bank Mock1 should be learned! Mock1: ");Serial.print(mock1state);Serial.print(" Mock2: ");Serial.println(mock2state);
+		Serial.print("[ERROR] For 2 memory bank Mock1 should be learned! Mock1: ");Serial.print(mock1state);Serial.print(" Mock2: ");Serial.println(mock2state);
 		exit (1);
 #endif
 	}
@@ -196,13 +198,14 @@ void testMock2and1(StateController& brain){
 
 }
 int main(int argc, char **argv) {
-	QLearningMachine brain = QLearningMachine(&restState, stateMap);
+	Memory memory = Memory(stateMap,internalMemmory);
+	QLearningMachine brain = QLearningMachine(&memory);
 	//test simple learning
 	testMock2(brain);
 	//test learning second thing after learning one
 	testMock1(brain);
 
-	QLearningMachine brain2 = QLearningMachine(&restState, stateMap, 0.0);
+	QLearningMachine brain2 = QLearningMachine(&memory, 0.0);
 
 	testMock2(brain2);
 

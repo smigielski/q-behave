@@ -14,7 +14,7 @@ namespace q_learning {
 
 class QLearningMachine: public q_learning::StateController {
 public:
-	QLearningMachine(Memory _memory, double _restartPenalty=-5.0);
+	QLearningMachine(Memory* _memory, double _restartPenalty=-5.0);
 	virtual ~QLearningMachine();
 private:
 	double learningRate;

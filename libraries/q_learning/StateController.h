@@ -21,16 +21,17 @@ namespace q_learning {
 
 class StateController {
 public:
-	StateController(Memory _memory, double _restartPenalty=-5.0);
+	StateController(Memory* _memory, double _restartPenalty=-5.0);
 	virtual ~StateController();
 	void start(int impulse, State* startState);
 	virtual void invokeNextAction();
 	void stop(double amount);
-	State* currentState;
+	State* currentState = 0;
+	Memory* memory = 0;
 private:
 	double restartPenalty;
-	Action* currentAction;
-	Memory memory;
+	Action* currentAction = 0;
+
 
 	virtual Action* getNextAction(StateActions stateActions) = 0;
 	virtual double getUpdatedQuality(double amount, double quality, State* state)=0;

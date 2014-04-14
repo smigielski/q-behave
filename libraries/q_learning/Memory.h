@@ -28,21 +28,21 @@ struct StateMap {
 	StateActions* states;
 };
 
-struct Segment {
-	int memoryNumber;
-	StateMap states;
-	Segment* next;
-};
+
 
 class Memory {
 public:
-	Memory(StateMap main);
+	Memory(StateMap _stateMap, double* _internalMemmory[]);
 	virtual ~Memory();
-
 	StateActions getStateActions(State* state);
 	bool loadMemory(int memoryNumber);
 private:
-	Segment* firstSegment;
+	StateMap stateMap;
+	int currentMap;
+	double** internalMemmory;
+
+	void storeInternal(int memoryNumber);
+	void loadInternal(int memoryNumber);
 };
 
 } /* namespace q_learning */
