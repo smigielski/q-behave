@@ -1,0 +1,41 @@
+= Q-Behave
+Marek Smigielski
+
+The +Q-Behave+ is Arduino compatible C++ library for machine learning applications. 
+It implements Q-Learning algorithm as an action quantifier for state machine. This means
+that you can expect from your program to react to user inputs in adaptive way. Instead 
+of binary reasoning that is usaly hardcoded by developer, machine will follow simple 
+learning process starting from fully random behaviour converting over time into fulfilling 
+user expectations.    
+
+
+== Example
+
+Using of this library is very simple. In fact even six year old girl had no problems 
+with teching Arduino how to distinguish colors. Watch this video to see full learning process:
+ 
+video::92062034[vimeo, 400, 300]
+
+In this process we had three buttons and RGB diode. No mixing of colors were used so this 
+behaviurs as three seperate diodes. 
+The aim of the teacher was to pick one color and assign to the button on the breadboard. 
+Whenever Arduino shows correct color after pushing the button, supervisor accept it 
+with reward button.
+
+As in this video learning time is very short so 60s to learn this basic schema with acceptable
+level of success ratio was enought.
+   
+
+== Starting up
+
+=== Hardware
+
+=== Libraries
+
+== Possiblities
+
+== License
+
+This work is licensed as GPL software. See LICENSE file for full text.
+
+If you need other license or would like to get support, please contact me at marek.smigielski(at)gmail.com
