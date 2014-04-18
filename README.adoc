@@ -1,9 +1,32 @@
 = Q-Behave
 Marek Smigielski
 
+The +Q-Behave+ is machine learning library written in C++ compatible with Arduino and other embeded devices. 
+Idea behind machine learning is to allow your device to learn behaviour from user interactions without the need
+to program it beforehand. 
+
+To ilustrate this idea lets take RGB diode with only one button as an example. After pressing the button user is expecting 
+to see diode to flush with some color. Every user have different color in mind when pressing the button and in conventional 
+way it cannot be program to guess user intention. When we put Q-Behave as a processor between interaction (pressing a button)
+and state (flushing the diode) device will choose one of possible states based on prior experience gain from
+user interaction. So when I expect to see green light and instead the led is flushing with red one, I press the button immediatly again
+and in that way inform the processor that I was expecting something different. After several trials device respond with proper
+color at the first time because it learns what I expect from it. In that way exactly one program can 
+behave differently for every user. In fact the same rules applies when user changes his mind thus forcing the device 
+to learn new behaviour. After some trials with the old color it will adopt to the new rules and satisfy user expectations
+without the need to reprogram it.
+
+ 
+
+
+ 
+
+interactionsde --> processor --> action
+
+
 The +Q-Behave+ is Arduino compatible C++ library for machine learning applications. 
-It implements Q-Learning algorithm as an action quantifier for machine state. This means
-that you can expect your program to react to user inputs in adaptive way. Instead 
+It implements Q-Learning algorithm as an action quantifier for state machine. This means
+that you can expect from your program to react to user inputs in adaptive way. Instead 
 of binary reasoning that is usaly hardcoded by developer, machine will follow simple 
 learning process starting from fully random behaviour converting over time into fulfilling 
 user expectations.    
@@ -11,19 +34,19 @@ user expectations.
 
 == Example
 
-Using this library is very simple. In fact even six year old girl had no problems 
- teaching Arduino how to distinguish colors. Watch this video to see full learning process:
+Using of this library is very simple. In fact even six year old girl had no problems 
+with teching Arduino how to distinguish colors. Watch this video to see full learning process:
  
 video::92062034[vimeo, 400, 300]
 
-In this process we had three buttons and RGB diode. No mixing of colors was used so this 
-setup acts as three seperate diodes. 
-The aim of the teacher was to pick one color and assign it to the button on the breadboard. 
-Whenever Arduino shows correct color after pushing the button, the teacher accepts it 
-by pressing the reward button.
+In this process we had three buttons and RGB diode. No mixing of colors were used so this 
+behaviurs as three seperate diodes. 
+The aim of the teacher was to pick one color and assign to the button on the breadboard. 
+Whenever Arduino shows correct color after pushing the button, supervisor accept it 
+with reward button.
 
-As shown in this video, learning time is very short. 60 second to learn a basic pattern with acceptable
-level of success was enough.
+As in this video learning time is very short so 60s to learn this basic schema with acceptable
+level of success ratio was enought.
    
 
 == Starting up
