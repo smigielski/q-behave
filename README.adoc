@@ -16,6 +16,7 @@ behave differently for every user. In fact the same rules applies when user chan
 to learn new behaviour. After some trials with the old color it will adopt to the new rules and satisfy user expectations
 without the need to reprogram it.
 
+
  
 END OF NEW VERSION
 
