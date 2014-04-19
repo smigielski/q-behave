@@ -1,21 +1,16 @@
 = Q-Behave
 Marek Smigielski
 
-The +Q-Behave+ is machine learning library written in C++ compatible with Arduino and other embeded devices. 
-Idea behind machine learning is to allow your device to learn behaviour from user interactions without the need
-to program it beforehand. 
++Q-Behave+ is machine learning library written in C++ compatible with Arduino and other embeded devices. 
+The idea behind machine learning is to allow your device to acquire patterns based on user interactions. This is achieved without the need to program them beforehand. 
 
-To ilustrate this idea lets take RGB diode with only one button as an example. After pressing the button user is expecting 
-to see diode to flush with some color. Every user have different color in mind when pressing the button and in conventional 
-way it cannot be program to guess user intention. When we put Q-Behave as a processor between interaction (pressing a button)
-and state (flushing the diode) device will choose one of possible states based on prior experience gain from
-user interaction. So when I expect to see green light and instead the led is flushing with red one, I press the button immediatly again
-and in that way inform the processor that I was expecting something different. After several trials device respond with proper
-color at the first time because it learns what I expect from it. In that way exactly one program can 
-behave differently for every user. In fact the same rules applies when user changes his mind thus forcing the device 
-to learn new behaviour. After some trials with the old color it will adopt to the new rules and satisfy user expectations
-without the need to reprogram it.
+To illustrate this concept take RGB diode with only one button as an example. After pressing the button the user expects to see diode flash with some color. Next user will have different color in mind when pressing the button. In a conventional way the system cannot be programmed to guess user intention on which color to show.
 
+When we put Q-Behave as a processor between interaction (pressing a button)
+and state (flashing the diode) the device will choose one of possible states based on prior experience gained from user interaction. So when the user expects to see green light and instead the led flashes a different color, the user presses the button immediately again to finally get the desired color. This way the user informs the processor that he/she was expecting a different state of the diode. After several trials the device responds with a correct color right the first time because it learns what the user expects from it. 
+
+Utilizing this technique one program can behave differently and adapt to different users. In fact the same rule applies when user changes his mind thus forcing the device 
+to learn the new behaviour. After some trials with the old color the program will adapt to new rules and satisfy user expectations without the need to reprogram it.
 
  
 END OF NEW VERSION
