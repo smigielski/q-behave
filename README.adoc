@@ -18,7 +18,7 @@ To understand better what is this system take a look at block diagram of Q-Behav
 
 [[img-block]]
 .Q-Behave block diagram
-image::../blob/master/docs/q-behave.png[]  
+image::../raw/master/docs/q-behave.png[]  
 
 +Inputs+ represents anything that can interact with the system like for example buttons or timers. It goes into the +State Controller+ which checks the memory and ask +Learning Processor+ to calculate the best action. As an outcome of this process an action changes the +State+ of the machine. Reward or penalty is calculated either when triggered from external interaction or timer or as a result of repetition of the same action.    
 
@@ -26,7 +26,7 @@ In Arduino code interaction is just an invocation of the function with the integ
 
 [[img-state]]
 .Q-Behave state types
-image::../blob/master/docs/q-behave-state.png[]  
+image::../raw/master/docs/q-behave-state.png[]  
 
 The only thing that might need additional explanation is the testing environment and a special class +MockState+. The purpose of those two thing is to provide simple solution for testing the behaviour algorithm without the need of conneting any physical device.  
 
