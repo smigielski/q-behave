@@ -30,7 +30,7 @@
 
 namespace q_learning {
 
-QLearningMachine::QLearningMachine(Memory* _memory) : StateController(_memory){
+QLearningMachine::QLearningMachine(Memory* _memory,  State* _startState) : StateController(_memory,_startState){
 	//learning definition
 	this->learningRate=0.1;
 	this->discountRate=0.9;

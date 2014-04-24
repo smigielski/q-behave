@@ -30,7 +30,20 @@ image::../raw/master/docs/q-behave-state.png[]
 
 The only thing that might need additional explanation is the testing environment and a special class +MockState+. The purpose of those two thing is to provide simple solution for testing the behaviour algorithm without the need of conneting any physical device.  
 
-== Example
+== Examples
+
+=== RGB Diode stearing with one button only
+
+
+=== RGB Diode with three buttons and a special reward button
+
+[[img-Q_Behave_RGB_Led_schem]]
+.Schematics of RGB Diode stearing with one button only
+image::../raw/master/libraries/q_learning/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_schem.png[]  
+
+[[img-Q_Behave_RGB_Led_bb]]
+.Breadboard of RGB Diode stearing with one button only
+image::../raw/master/libraries/q_learning/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_bb.png[]  
 
 Using this library is very simple. In fact even six year old girl had no problems 
 teaching Arduino how to distinguish colors. Watch https://vimeo.com/92062034[this video] to see full learning process:
@@ -57,4 +70,4 @@ level of success was enough.
 
 This work is licensed as GPL software. See LICENSE file for full text.
 
-If you need other license or would like to get support, please contact me at marek.smigielski(at)gmail.com
+If you need other license or would like to get support, please contact us.

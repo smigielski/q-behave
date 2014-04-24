@@ -33,7 +33,7 @@ namespace q_learning {
  */
 class QLearningMachine: public q_learning::StateController {
 public:
-	QLearningMachine(Memory* _memory);
+	QLearningMachine(Memory* _memory,  State* _startState);
 private:
 	double learningRate;
 	double discountRate;

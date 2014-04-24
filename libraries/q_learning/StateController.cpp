@@ -30,29 +30,31 @@
 
 namespace q_learning {
 
-StateController::StateController(Memory* _memory) {
+StateController::StateController(Memory* _memory,  State* _startState) {
 	this->memory = _memory;
-	this->currentState = 0;
+	this->currentState = _startState;
+	this->startState = _startState;
 	this->currentAction = 0;
 #ifdef _INFO_
 	Serial.println("[INFO] Brain created.");
 #endif
 }
 
-void StateController::start(int impulse, State* startState) {
+void StateController::start(int impulse) {
 #ifdef _INFO_
 	Serial.println("--------------------------------------");
 	Serial.print("[INFO] Starting activity for impulse: ");
 	Serial.println(impulse);
 #endif
 	//check current state and react if in the middle of activity
-	memory->loadMemory(impulse);
+	if (memory->loadMemory(impulse)){
 
-	if (currentState != 0 && currentState != startState) {
-		stop(0);
-		currentState = currentState->switchTo(startState);
-	} else {
-		currentState = startState;
+		if (currentState != 0 && currentState != startState) {
+			stop(0);
+			currentState = currentState->switchTo(startState);
+		} else {
+			currentState = startState;
+		}
 	}
 	//choose action
 	invokeNextAction();

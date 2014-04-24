@@ -39,15 +39,16 @@ namespace q_learning {
  */
 class StateController {
 public:
-	StateController(Memory* _memory);
+	StateController(Memory* _memory, State* _startState);
 
 
-	void start(int impulse, State* startState);
+	void start(int impulse);
 	virtual void invokeNextAction();
 	void stop(double amount);
 
 	Memory* memory;
 	State* currentState;
+	State* startState;
 	Action* currentAction;
 
 private:
