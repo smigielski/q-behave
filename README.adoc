@@ -2,7 +2,6 @@
 Marek Smigielski
 
 :imagesdir: ../raw/master
-//// :imagesdir: ./
 
 +Q-Behave+ is machine learning library written in C++ compatible with Arduino and other embeded devices. 
 The idea behind machine learning is to allow your device to acquire patterns based on user interactions. This is achieved without the need to program them beforehand. 
@@ -29,7 +28,7 @@ In Arduino code interaction is just an invocation of the function with the integ
 
 [[img-state]]
 .Q-Behave state types
-image::../raw/master/docs/q-behave-state.png[]  
+image::./docs/q-behave-state.png[]  
 
 The only thing that might need additional explanation is the testing environment and a special class +MockState+. The purpose of those two thing is to provide simple solution for testing the behaviour algorithm without the need of conneting any physical device.  
 
@@ -37,16 +36,27 @@ The only thing that might need additional explanation is the testing environment
 
 === RGB Diode stearing with one button only
 
+[[img-Q_Behave_RGB_Led_schem]]
+.Schematics of RGB Diode stearing with one button only
+image::./libraries/q_learning/examples/Q_Behave_Single_Button/Q_Behave_Single_Button_bb.png[width="700"]  
+
+
+
+[[img-Q_Behave_RGB_Led_bb]]
+.Breadboard of RGB Diode stearing with one button only
+image::./libraries/q_learning/examples/Q_Behave_Single_Button/Q_Behave_Single_Button_schem.png[width="700"]  
+
+
 
 === RGB Diode with three buttons and a special reward button
 
 [[img-Q_Behave_RGB_Led_schem]]
-.Schematics of RGB Diode stearing with one button only
-image::../raw/master/libraries/q_learning/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_schem.png[]  
+.Schematics of RGB Diode with three buttons and a special reward button
+image::./libraries/q_learning/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_schem.png[width="700"]  
 
 [[img-Q_Behave_RGB_Led_bb]]
-.Breadboard of RGB Diode stearing with one button only
-image::../raw/master/libraries/q_learning/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_bb.png[]  
+.Breadboard of RGB Diode with three buttons and a special reward button
+image::./libraries/q_learning/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_bb.png[width="700"]  
 
 
 Using this library is very simple. In fact even six year old girl had no problems 
