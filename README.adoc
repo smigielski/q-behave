@@ -30,20 +30,39 @@ In Arduino code interaction is just an invocation of the function with the integ
 .Q-Behave state types
 image::./docs/q-behave-state.png[]  
 
-The only thing that might need additional explanation is the testing environment and a special class +MockState+. The purpose of those two thing is to provide simple solution for testing the behaviour algorithm without the need of conneting any physical device.  
+The only thing that might need additional explanation is the testing environment and a special class +MockState+. The purpose of those two thing is to provide simple solution for testing the behaviour algorithm without the need of conneting any physical device.
+
+== Download and Install
+To download this library using git:
+
+[source,bash]
+----
+git clone git@github.com:smigielski/q-behave.git
+----
+
+or
+
+[source,bash]
+----
+git clone https://github.com/smigielski/q-behave.git
+----
+
+To install, copy libraries/q-behave to your Arduino/libraries/ directory. No other tasks are required and you have library ready to be used. Check example projects for details.  
 
 == Examples
 
-=== RGB Diode stearing with one button only
+=== RGB Diode control with one button only
+
+First example 
 
 [[img-Q_Behave_RGB_Led_schem]]
-.Schematics of RGB Diode stearing with one button only
+.Schematics of RGB Diode control with one button only
 image::./libraries/q_learning/examples/Q_Behave_Single_Button/Q_Behave_Single_Button_bb.png[width="700"]  
 
 
 
 [[img-Q_Behave_RGB_Led_bb]]
-.Breadboard of RGB Diode stearing with one button only
+.Breadboard of RGB Diode control with one button only
 image::./libraries/q_learning/examples/Q_Behave_Single_Button/Q_Behave_Single_Button_schem.png[width="700"]  
 
 
