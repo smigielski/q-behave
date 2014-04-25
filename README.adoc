@@ -171,7 +171,7 @@ SimpleMemory memory = SimpleMemory(stateMap,internalMemmory);
 QLearningMachine brain = QLearningMachine(&memory,&restState);
 ----
 
-To see full source code of this example go to ./libraries/q_behave/examples/Q_Behave_Single_Button.ino[Q_Behave_Single_Button.ino] 
+To see full source code of this example go to link:./libraries/q_behave/examples/Q_Behave_Single_Button.ino[Q_Behave_Single_Button.ino] 
 
 === RGB Diode with three buttons and a special reward button
 
