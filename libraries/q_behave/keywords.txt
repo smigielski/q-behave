@@ -1,0 +1,28 @@
+#
+# Syntax coloring for State Learning Library
+#
+
+# Datatypes (Classes)
+StateController 	KEYWORD1
+QLearningMachine 	KEYWORD1
+
+#Memory
+Memory				KEYWORD1
+SimpleMemory		KEYWORD1
+
+#States
+RestState     	 	KEYWORD1
+LedState	 	    KEYWORD1
+MockState			KEYWORD1
+
+#Structures
+Action				KEYWORD1
+StateActions		KEYWORD1
+StateMap			KEYWORD1
+
+# Methods and functions
+#cmd	KEYWORD2
+
+
+# Constants (Macros in this case)
+#DEBUG_HC05	LITERAL1

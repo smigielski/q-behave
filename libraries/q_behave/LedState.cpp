@@ -1,0 +1,46 @@
+/*
+ * State machine with learning capabilities.
+ *
+ * Copyright (C) 2014 Poliprojekt.pl sp. z o.o.
+ * Author: Marek Smigielski <marek.smigielski@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ */
+
+#ifndef _TEST_
+#include <Arduino.h>
+#else
+#include "mock_arduino.h"
+#endif
+
+#include "LedState.h"
+
+namespace q_learning {
+
+LedState::LedState(char* _stateName, int _pin) : State(_stateName) {
+	this->pin = _pin;
+	pinMode(pin, OUTPUT);
+}
+
+void LedState::activate() {
+	digitalWrite(pin, HIGH);
+}
+
+void LedState::deactivate() {
+	digitalWrite(pin, LOW);
+}
+
+} /* namespace q_learning */
