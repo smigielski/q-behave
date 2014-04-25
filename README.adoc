@@ -91,6 +91,87 @@ If you need we also provide you detail schematics file for a reference:
 .Breadboard of RGB Diode control with one button only
 image::./libraries/q_behave/examples/Q_Behave_Single_Button/Q_Behave_Single_Button_schem.png[width="700"]  
 
+When you have hardware in place there is time to see software in more detail. First thing is organization of the states.
+
+----
+//Define states
+RestState restState = RestState();
+LedState green = LedState("green",9);
+LedState blue = LedState("blue",10);
+LedState red = LedState("red",11);
+
+//Prepare connection map between states. Note that it is allow only to move
+//from rest state to led states and off again.
+Action restActions[] = { { &green, 0.0 }, { &blue, 0.0 },{ &red, 0.0 } };
+Action greenActions[] = { { &restState, 0.0 }};
+Action blueActions[] = { { &restState, 0.0 }};
+Action redActions[] = { { &restState, 0.0 }};
+
+StateActions states[] = {
+		{&restState,3, restActions },
+		{&green,1,greenActions},
+		{&blue,1,blueActions},
+		{&red,1,redActions}
+};
+StateMap stateMap = { 4, states };
+----
+
+As mentioned earlier RestState is the initial state with all leds turn off and each LedState represent different color. In action arrays there is definiton of posible action that Q-Behave can take from one state to the other. The last thing is that we have to gather it together in states array and than in state map, structure representing state system.
+
+Next we can see how interaction and reward function is defined. In this case with have only one interaction button and as a reward there is timer configured.
+
+----
+//Interactions
+SimpleButton button1 = SimpleButton(14);
+SimpleTimer rewardTimer;
+int timerId;
+
+
+//Button configuration
+void onReward(){
+    Serial.println("onReward: ");
+    brain.stop(10.0);
+}
+
+void onButton1(SimpleButton& b){
+    Serial.print("onButton1: ");
+    Serial.println(b.pin);
+    brain.start(0);
+    if (rewardTimer.isEnabled(timerId)){
+      //if timer was already enable than restart it
+      rewardTimer.restartTimer(timerId);
+    } else {
+      timerId = rewardTimer.setTimeout(5000, onReward);  
+    }
+}
+
+
+//Startup code
+void setup() {
+   button1.pressHandler(onButton1);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  button1.process();
+  rewardTimer.run();
+}
+----
+
+The last piece of information that is missing is memory and processing system.
+
+----
+//Simple memory definition and configuration. All memory is blocked in heap.
+//Please note that memory is volatile right now and will not survive restart.
+double prob1[6];
+double* internalMemmory[]={prob1};
+SimpleMemory memory = SimpleMemory(stateMap,internalMemmory);
+
+//Main learning process. 
+QLearningMachine brain = QLearningMachine(&memory,&restState);
+----
+
+To see full source code of this example go to ./libraries/q_behave/examples/Q_Behave_Single_Button.ino[Q_Behave_Single_Button.ino] 
 
 === RGB Diode with three buttons and a special reward button
 

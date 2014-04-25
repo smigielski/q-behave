@@ -33,10 +33,6 @@ LedState green = LedState("green",9);
 LedState blue = LedState("blue",10);
 LedState red = LedState("red",11);
 
-SimpleButton button1 = SimpleButton(14);
-SimpleTimer rewardTimer;
-int timerId;
-
 //Prepare connection map between states. Note that it is allow only to move
 //from rest state to led states.
 Action restActions[] = { { &green, 0.0 }, { &blue, 0.0 },{ &red, 0.0 } };
@@ -61,6 +57,11 @@ SimpleMemory memory = SimpleMemory(stateMap,internalMemmory);
 //Main learning process. 
 QLearningMachine brain = QLearningMachine(&memory,&restState);
 
+//Interactions
+SimpleButton button1 = SimpleButton(14);
+SimpleTimer rewardTimer;
+int timerId;
+
 
 //Button configuration
 void onReward(){
@@ -78,7 +79,6 @@ void onButton1(SimpleButton& b){
     } else {
       timerId = rewardTimer.setTimeout(5000, onReward);  
     }
-    // will print out "onPress: 12"
 }
 
 
