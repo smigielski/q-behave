@@ -1,7 +1,7 @@
 = Q-Behave
 Marek Smigielski
 
-:imagesdir: ../raw/master
+:imagesdir: https://github.com/smigielski/q-behave/raw/master
 
 +Q-Behave+ is machine learning library written in C++ compatible with Arduino and other embeded devices. 
 The idea behind machine learning is to allow your device to acquire patterns based on user interactions. This is achieved without the need to program them beforehand. 
