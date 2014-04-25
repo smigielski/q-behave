@@ -21,14 +21,14 @@
  */
 
 #include "mock_arduino.h"
-#include "../libraries/q_learning/QLearningMachine.h"
-#include "../libraries/q_learning/RestState.h"
-#include "../libraries/q_learning/MockState.h"
-#include "../libraries/q_learning/SimpleMemory.h"
+#include "../libraries/q_behave/QLearningMachine.h"
+#include "../libraries/q_behave/RestState.h"
+#include "../libraries/q_behave/MockState.h"
+#include "../libraries/q_behave/SimpleMemory.h"
 #include <string.h>
 #include <stdlib.h>
 
-using namespace q_learning;
+using namespace q_behave;
 
 int mock1state = 0;
 int mock2state = 0;

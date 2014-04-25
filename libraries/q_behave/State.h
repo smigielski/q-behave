@@ -23,7 +23,7 @@
 #ifndef STATE_H_
 #define STATE_H_
 
-namespace q_learning {
+namespace q_behave {
 /**
  * Base class for state modeling
  */
@@ -38,6 +38,6 @@ private:
 	char* stateName;
 };
 
-} /* namespace q_learning */
+} /* namespace q_behave */
 
 #endif /* STATE_H_ */

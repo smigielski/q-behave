@@ -28,7 +28,7 @@
 
 #include "LedState.h"
 
-namespace q_learning {
+namespace q_behave {
 
 LedState::LedState(char* _stateName, int _pin) : State(_stateName) {
 	this->pin = _pin;
@@ -43,4 +43,4 @@ void LedState::deactivate() {
 	digitalWrite(pin, LOW);
 }
 
-} /* namespace q_learning */
+} /* namespace q_behave */

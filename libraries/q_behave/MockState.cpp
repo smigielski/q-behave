@@ -28,7 +28,7 @@
 
 #include "MockState.h"
 
-namespace q_learning {
+namespace q_behave {
 
 MockState::MockState(char* _stateName, int* _state) :
 		State(_stateName) {
@@ -43,4 +43,4 @@ void MockState::deactivate() {
 	*state = 0;
 }
 
-} /* namespace q_learning */
+} /* namespace q_behave */

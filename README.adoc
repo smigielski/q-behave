@@ -57,13 +57,13 @@ First example
 
 [[img-Q_Behave_RGB_Led_schem]]
 .Schematics of RGB Diode control with one button only
-image::./libraries/q_learning/examples/Q_Behave_Single_Button/Q_Behave_Single_Button_bb.png[width="700"]  
+image::./libraries/q_behave/examples/Q_Behave_Single_Button/Q_Behave_Single_Button_bb.png[width="700"]  
 
 
 
 [[img-Q_Behave_RGB_Led_bb]]
 .Breadboard of RGB Diode control with one button only
-image::./libraries/q_learning/examples/Q_Behave_Single_Button/Q_Behave_Single_Button_schem.png[width="700"]  
+image::./libraries/q_behave/examples/Q_Behave_Single_Button/Q_Behave_Single_Button_schem.png[width="700"]  
 
 
 
@@ -71,11 +71,11 @@ image::./libraries/q_learning/examples/Q_Behave_Single_Button/Q_Behave_Single_Bu
 
 [[img-Q_Behave_RGB_Led_schem]]
 .Schematics of RGB Diode with three buttons and a special reward button
-image::./libraries/q_learning/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_schem.png[width="700"]  
+image::./libraries/q_behave/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_schem.png[width="700"]  
 
 [[img-Q_Behave_RGB_Led_bb]]
 .Breadboard of RGB Diode with three buttons and a special reward button
-image::./libraries/q_learning/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_bb.png[width="700"]  
+image::./libraries/q_behave/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_bb.png[width="700"]  
 
 
 Using this library is very simple. In fact even six year old girl had no problems 

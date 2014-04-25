@@ -25,7 +25,7 @@
 
 #include "Memory.h"
 
-namespace q_learning {
+namespace q_behave {
 
 /**
  * Simple memory that retrieves and store state quantity in internal preallocated memory.
@@ -39,6 +39,6 @@ private:
 	double** internalMemmory;
 };
 
-} /* namespace q_learning */
+} /* namespace q_behave */
 
 #endif /* SIMPLEMEMORY_H_ */

@@ -25,7 +25,7 @@
 #include <SimpleButton.h>
 #include <SimpleTimer.h>
 
-using namespace q_learning;
+using namespace q_behave;
 
 //Define states and buttons
 RestState restState = RestState();

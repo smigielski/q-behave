@@ -28,7 +28,7 @@
 
 #include "SimpleMemory.h"
 
-namespace q_learning {
+namespace q_behave {
 
 SimpleMemory::SimpleMemory(StateMap _stateMap, double* _internalMemmory[]) : Memory(_stateMap) {
 	this->internalMemmory=_internalMemmory;
@@ -55,4 +55,4 @@ void SimpleMemory::loadInternal(int memoryNumber) {
 	}
 }
 
-} /* namespace q_learning */
+} /* namespace q_behave */

@@ -26,12 +26,12 @@
 
 #include "State.h"
 
-namespace q_learning {
+namespace q_behave {
 
 /**
  * Mock state for using with tests only.
  */
-class MockState: public q_learning::State {
+class MockState: public q_behave::State {
 public:
 	MockState(char* stateName, int* _state);
 	virtual void activate();
@@ -40,6 +40,6 @@ private:
 	int* state;
 };
 
-} /* namespace q_learning */
+} /* namespace q_behave */
 
 #endif /* MOCKSTATE_H_ */

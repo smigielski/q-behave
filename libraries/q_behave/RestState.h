@@ -25,19 +25,19 @@
 
 #include "State.h"
 
-namespace q_learning {
+namespace q_behave {
 
 /**
  * State used as a rest state. Activating or deactivating does not have any visible action.
  * It can be used as a start state.
  */
-class RestState: public q_learning::State {
+class RestState: public q_behave::State {
 public:
 	RestState();
 	virtual void activate();
 	virtual void deactivate();
 };
 
-} /* namespace q_learning */
+} /* namespace q_behave */
 
 #endif /* RESTSTATE_H_ */

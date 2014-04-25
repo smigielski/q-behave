@@ -25,7 +25,7 @@
 
 #include "State.h"
 
-namespace q_learning {
+namespace q_behave {
 
 /**
  * Structure to hold state and quality estimate for the action
@@ -70,6 +70,6 @@ private:
 	virtual void loadInternal(int memoryNumber) = 0;
 };
 
-} /* namespace q_learning */
+} /* namespace q_behave */
 
 #endif /* MEMORY_H_ */

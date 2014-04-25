@@ -28,7 +28,7 @@
 
 #include "Memory.h"
 
-namespace q_learning {
+namespace q_behave {
 
 Memory::Memory(StateMap _stateMap) {
 	this->stateMap = _stateMap;
@@ -97,4 +97,4 @@ StateActions Memory::getStateActions(State* state) {
 //	}
 //}
 
-} /* namespace q_learning */
+} /* namespace q_behave */

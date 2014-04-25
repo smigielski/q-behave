@@ -25,7 +25,7 @@
 
 #include "State.h"
 
-namespace q_learning {
+namespace q_behave {
 
 /**
  * One of the states that represent led status.
@@ -39,6 +39,6 @@ private:
 	int pin;
 };
 
-} /* namespace q_learning */
+} /* namespace q_behave */
 
 #endif /* LEDSTATE_H_ */

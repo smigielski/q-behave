@@ -28,7 +28,7 @@
 
 #include "State.h"
 
-namespace q_learning {
+namespace q_behave {
 
 State::State(char* _stateName) {
 	this->stateName = _stateName;
@@ -49,4 +49,4 @@ State* State::switchTo(State* state) {
 	return state;
 }
 
-} /* namespace q_learning */
+} /* namespace q_behave */

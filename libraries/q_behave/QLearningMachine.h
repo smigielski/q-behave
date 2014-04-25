@@ -26,12 +26,12 @@
 
 #include "StateController.h"
 
-namespace q_learning {
+namespace q_behave {
 /**
  * Q-Learning algorithm implementation.
  * It randomize action choices according to Boltzmann-Gibbs rule.
  */
-class QLearningMachine: public q_learning::StateController {
+class QLearningMachine: public q_behave::StateController {
 public:
 	QLearningMachine(Memory* _memory,  State* _startState);
 private:
@@ -47,6 +47,6 @@ private:
 
 };
 
-} /* namespace q_learning */
+} /* namespace q_behave */
 
 #endif /* QLEARNINGMACHINE_H_ */

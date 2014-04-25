@@ -28,7 +28,7 @@
 
 #include "RestState.h"
 
-namespace q_learning {
+namespace q_behave {
 
 RestState::RestState() : State("rest"){
 
@@ -42,4 +42,4 @@ void RestState::deactivate() {
 	//do nothing
 }
 
-} /* namespace q_learning */
+} /* namespace q_behave */

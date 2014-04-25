@@ -32,7 +32,7 @@
 #define _INFO_
 #define _ERROR_
 
-namespace q_learning {
+namespace q_behave {
 
 /**
  * Main class controlling state machine and actions between them.
@@ -56,6 +56,6 @@ private:
 	virtual double getUpdatedQuality(double amount, double quality, State* state)=0;
 };
 
-} /* namespace q_learning */
+} /* namespace q_behave */
 
 #endif /* STATECONTROLLER_H_ */

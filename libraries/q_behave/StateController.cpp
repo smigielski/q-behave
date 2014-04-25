@@ -28,7 +28,7 @@
 
 #include "StateController.h"
 
-namespace q_learning {
+namespace q_behave {
 
 StateController::StateController(Memory* _memory,  State* _startState) {
 	this->memory = _memory;
@@ -86,4 +86,4 @@ void StateController::invokeNextAction() {
 	currentState = currentState->switchTo(currentAction->state);
 }
 
-} /* namespace q_learning */
+} /* namespace q_behave */

@@ -28,7 +28,7 @@
 #include "math.h";
 #include "QLearningMachine.h"
 
-namespace q_learning {
+namespace q_behave {
 
 QLearningMachine::QLearningMachine(Memory* _memory,  State* _startState) : StateController(_memory,_startState){
 	//learning definition
@@ -95,4 +95,4 @@ double QLearningMachine::getMaxReward(State* state) {
 	return maxQuality;
 }
 
-} /* namespace q_learning */
+} /* namespace q_behave */
