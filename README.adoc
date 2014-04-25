@@ -53,50 +53,180 @@ To install, copy libraries/q-behave to your Arduino/libraries/ directory. No oth
 
 === RGB Diode control with one button only
 
-First example 
+First example that you can use to learn how this library works and to check how good user experience is when using learning devices. Except Arduino there are only few requiered components so I am quite sure you can build it with what you have.
+
+.Part list for RGB Diode control with one button only
+[cols="3*", options="header"]
+|===	
+|Part Type
+|Amount	
+|Properties
+
+|1	
+|Arduino Uno (Rev3)	
+|type Arduino UNO (Rev3)
+
+|1	
+|RGB LED (com. anode, rbg)	
+|package 5 mm [THT]; pin order rbg;   
+
+|1	
+|Pushbutton	
+|package [THT]
+
+|1	
+|10k Ω Resistor	
+|package THT; resistance 10kΩ;
+|===
+
+It is best to first build it on the breadbord to see how it works:
 
 [[img-Q_Behave_RGB_Led_schem]]
 .Schematics of RGB Diode control with one button only
 image::./libraries/q_behave/examples/Q_Behave_Single_Button/Q_Behave_Single_Button_bb.png[width="700"]  
 
-
+If you need we also provide you detail schematics file for a reference:
 
 [[img-Q_Behave_RGB_Led_bb]]
 .Breadboard of RGB Diode control with one button only
 image::./libraries/q_behave/examples/Q_Behave_Single_Button/Q_Behave_Single_Button_schem.png[width="700"]  
 
 
-
 === RGB Diode with three buttons and a special reward button
 
-[[img-Q_Behave_RGB_Led_schem]]
-.Schematics of RGB Diode with three buttons and a special reward button
-image::./libraries/q_behave/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_schem.png[width="700"]  
+Second example, also quite simple, is mainly the same as previous one but this time there are three buttons that can be learned individually and a special reward button. To see how the learning process look like see https://vimeo.com/92062034[this video].
+
+The bread board and the schematics look almost the same. The only difference is that now it contains more buttons:
 
 [[img-Q_Behave_RGB_Led_bb]]
 .Breadboard of RGB Diode with three buttons and a special reward button
 image::./libraries/q_behave/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_bb.png[width="700"]  
 
+and schematics:
 
-Using this library is very simple. In fact even six year old girl had no problems 
-teaching Arduino how to distinguish colors. Watch https://vimeo.com/92062034[this video] to see full learning process:
+[[img-Q_Behave_RGB_Led_schem]]
+.Schematics of RGB Diode with three buttons and a special reward button
+image::./libraries/q_behave/examples/Q_Behave_RGB_Led/Q_Behave_RGB_Led_schem.png[width="700"]  
+
+If you want to be certain about what we have used this is the part list: 
+
+.Part list for RGB Diode with three buttons and a special reward button
+[cols="3*", options="header"]
+|===	
+|Part Type
+|Amount	
+|Properties
+
+|1	
+|Arduino Uno (Rev3)	
+|type Arduino UNO (Rev3)
+
+|1	
+|RGB LED (com. anode, rbg)	
+|package 5 mm [THT]; pin order rbg;   
+
+|4	
+|Pushbutton	
+|package [THT]
+
+|4	
+|10k Ω Resistor	
+|package THT; resistance 10kΩ;
+|===
+
+
+This time we need to define more buttons and reward function as a callback to the button press instead of the timer:
+
+----
+SimpleButton button1 = SimpleButton(14);
+SimpleButton button2 = SimpleButton(15);
+SimpleButton button3 = SimpleButton(16);
+
+SimpleButton reward = SimpleButton(17);
+----
+
+and more interaction function:
+
+----
+void onReward(SimpleButton& b){
+    Serial.print("onReward: ");
+    Serial.println(b.pin);
+    brain.stop(10.0);
+}
+
+void onButton1(SimpleButton& b){
+    Serial.print("onButton1: ");
+    Serial.println(b.pin);
+    brain.start(0);
+}
+
+void onButton2(SimpleButton& b){
+    Serial.print("onButton2: ");
+    Serial.println(b.pin);
+    brain.start(1);
+}
+
+void onButton3(SimpleButton& b){
+    Serial.print("onButton3: ");
+    Serial.println(b.pin);
+    brain.start(2);
+}
+----
+
+Setup and main loop is also a bit bigger now, but still quite clean:
  
-https://vimeo.com/92062034
+----
+//Startup code
+void setup() {
+   button1.pressHandler(onButton1);
+   button2.pressHandler(onButton2);
+   button3.pressHandler(onButton3);
+   reward.pressHandler(onReward);
+}
 
-In this process we had three buttons and RGB diode. No mixing of colors was used so this 
-setup acts as three seperate diodes. 
-The aim of the teacher was to pick one color and assign it to the button on the breadboard. 
-Whenever Arduino shows correct color after pushing the button, the teacher accepts it 
-by pressing the reward button.
+// the loop routine runs over and over again forever:
+void loop() {
+  reward.process();
+  button1.process();
+  button2.process();
+  button3.process();
+}
+----
 
-As shown in this video, learning time is very short. 60 second to learn a basic pattern with acceptable
-level of success was enough.   
+The last difference is that memory block have to accomodate more information, one prob array for each button.
 
-== Starting up
+----
+//Simple memory definition and configuration. All memory is blocked in heap.
+//Please note that memory is volatile right now and will not survive restart.
+double prob1[6],prob2[6],prob3[6];
+double* internalMemmory[]={prob1,prob2,prob3};
+SimpleMemory memory = SimpleMemory(stateMap,internalMemmory);
+---- 
 
-=== Hardware
+State system is exactly the same as it was before:
 
-=== Libraries
+----
+//Define states
+RestState restState = RestState();
+LedState green = LedState("green",9);
+LedState blue = LedState("blue",10);
+LedState red = LedState("red",11);
+
+//Prepare connection map between states. Note that it is allow only to move
+//from rest state to led states and off again.
+Action restActions[] = { { &green, 0.0 }, { &blue, 0.0 },{ &red, 0.0 } };
+Action greenActions[] = { { &restState, 0.0 }};
+Action blueActions[] = { { &restState, 0.0 }};
+Action redActions[] = { { &restState, 0.0 }};
+
+StateActions states[] = {
+		{&restState,3, restActions },
+		{&green,1,greenActions},
+		{&blue,1,blueActions},
+		{&red,1,redActions}
+};
+StateMap stateMap = { 4, states };
+----
 
 
 == License

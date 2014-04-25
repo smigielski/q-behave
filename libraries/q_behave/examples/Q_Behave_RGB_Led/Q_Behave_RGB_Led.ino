@@ -32,11 +32,6 @@ LedState green = LedState("green",9);
 LedState blue = LedState("blue",10);
 LedState red = LedState("red",11);
 
-SimpleButton button1 = SimpleButton(14);
-SimpleButton button2 = SimpleButton(15);
-SimpleButton button3 = SimpleButton(16);
-SimpleButton reward = SimpleButton(17);
-
 
 //Prepare connection map between states. Note that it is allow only to move
 //from rest state to led states.
@@ -62,34 +57,34 @@ SimpleMemory memory = SimpleMemory(stateMap,internalMemmory);
 //Main learning process. 
 QLearningMachine brain = QLearningMachine(&memory,&restState);
 
+SimpleButton button1 = SimpleButton(14);
+SimpleButton button2 = SimpleButton(15);
+SimpleButton button3 = SimpleButton(16);
+SimpleButton reward = SimpleButton(17);
 
 //Button configuration
 void onReward(SimpleButton& b){
     Serial.print("onReward: ");
     Serial.println(b.pin);
     brain.stop(10.0);
-    // will print out "onPress: 12"
 }
 
 void onButton1(SimpleButton& b){
     Serial.print("onButton1: ");
     Serial.println(b.pin);
     brain.start(0);
-    // will print out "onPress: 12"
 }
 
 void onButton2(SimpleButton& b){
     Serial.print("onButton2: ");
     Serial.println(b.pin);
     brain.start(1);
-    // will print out "onPress: 12"
 }
 
 void onButton3(SimpleButton& b){
     Serial.print("onButton3: ");
     Serial.println(b.pin);
     brain.start(2);
-    // will print out "onPress: 12"
 }
 
 //Startup code
