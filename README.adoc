@@ -82,6 +82,4 @@ level of success was enough.
 
 == License
 
-This work is licensed as GPL software. See LICENSE file for full text.
-
-If you need other license or would like to get support, please contact us.
+This work is licensed as GPL software. See LICENSE file for full text. If you need other license or would like to get support, please contact us.

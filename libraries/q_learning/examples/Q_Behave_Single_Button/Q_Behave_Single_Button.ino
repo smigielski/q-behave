@@ -11,13 +11,7 @@
   This example code is in the public domain.
 */
  
-//Button library created by Alexander Brevig
-//https://github.com/tigoe/Button
-#include <Button.h>
 
-//Timer library for making rewards (already included)
-//http://playground.arduino.cc/Code/SimpleTimer
-#include <SimpleTimer.h>
 
 //Internal learning system libraries
 #include <QLearningMachine.h>
@@ -27,6 +21,9 @@
 #include <RestState.h>
 #include <LedState.h>
 
+//Interaction
+#include <SimpleButton.h>
+#include <SimpleTimer.h>
 
 using namespace q_learning;
 
@@ -36,28 +33,28 @@ LedState green = LedState("green",9);
 LedState blue = LedState("blue",10);
 LedState red = LedState("red",11);
 
-Button button1 = Button(14);
+SimpleButton button1 = SimpleButton(14);
 SimpleTimer rewardTimer;
 int timerId;
 
 //Prepare connection map between states. Note that it is allow only to move
 //from rest state to led states.
 Action restActions[] = { { &green, 0.0 }, { &blue, 0.0 },{ &red, 0.0 } };
-Action greenActions[] = { { &restState, 0.0 }, { &blue, 0.0 },{ &red, 0.0 } };
-Action blueActions[] = { { &green, 0.0 }, { &restState, 0.0 },{ &red, 0.0 }};
-Action redActions[] = { { &green, 0.0 }, { &blue, 0.0 },{ &restState, 0.0 }};
+Action greenActions[] = { { &restState, 0.0 }};
+Action blueActions[] = { { &restState, 0.0 }};
+Action redActions[] = { { &restState, 0.0 }};
 
 StateActions states[] = {
 		{&restState,3, restActions },
-		{&green,3,greenActions},
-		{&blue,3,blueActions},
-                {&red,3,redActions}
+		{&green,1,greenActions},
+		{&blue,1,blueActions},
+                {&red,1,redActions}
 };
 StateMap stateMap = { 4, states };
 
 //Simple memory definition and configuration. All memory is blocked in heap.
 //Please note that memory is volatile right now and will not survive restart.
-double prob1[12];
+double prob1[6];
 double* internalMemmory[]={prob1};
 SimpleMemory memory = SimpleMemory(stateMap,internalMemmory);
 
@@ -71,7 +68,7 @@ void onReward(){
     brain.stop(10.0);
 }
 
-void onButton1(Button& b){
+void onButton1(SimpleButton& b){
     Serial.print("onButton1: ");
     Serial.println(b.pin);
     brain.start(0);

@@ -11,9 +11,7 @@
   This example code is in the public domain.
 */
  
-//Button library created by Alexander Brevig
-//https://github.com/tigoe/Button
-#include <Button.h>
+
 
 //Internal learning system libraries
 #include <QLearningMachine.h>
@@ -23,6 +21,8 @@
 #include <RestState.h>
 #include <LedState.h>
 
+//Interaction
+#include <SimpleButton.h>
 
 using namespace q_learning;
 
@@ -32,10 +32,10 @@ LedState green = LedState("green",9);
 LedState blue = LedState("blue",10);
 LedState red = LedState("red",11);
 
-Button button1 = Button(14);
-Button button2 = Button(15);
-Button button3 = Button(16);
-Button reward = Button(17);
+SimpleButton button1 = SimpleButton(14);
+SimpleButton button2 = SimpleButton(15);
+SimpleButton button3 = SimpleButton(16);
+SimpleButton reward = SimpleButton(17);
 
 
 //Prepare connection map between states. Note that it is allow only to move
@@ -64,28 +64,28 @@ QLearningMachine brain = QLearningMachine(&memory,&restState);
 
 
 //Button configuration
-void onReward(Button& b){
+void onReward(SimpleButton& b){
     Serial.print("onReward: ");
     Serial.println(b.pin);
     brain.stop(10.0);
     // will print out "onPress: 12"
 }
 
-void onButton1(Button& b){
+void onButton1(SimpleButton& b){
     Serial.print("onButton1: ");
     Serial.println(b.pin);
     brain.start(0);
     // will print out "onPress: 12"
 }
 
-void onButton2(Button& b){
+void onButton2(SimpleButton& b){
     Serial.print("onButton2: ");
     Serial.println(b.pin);
     brain.start(1);
     // will print out "onPress: 12"
 }
 
-void onButton3(Button& b){
+void onButton3(SimpleButton& b){
     Serial.print("onButton3: ");
     Serial.println(b.pin);
     brain.start(2);
