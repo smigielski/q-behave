@@ -53,7 +53,7 @@ Action* QLearningMachine::getNextAction(StateActions stateActions) {
 	int sum=0;
 	double maxQuality;
 	int i = 0;
-	while (sum<rand){
+	while (sum<rand && i<stateActions.actionCount){
 		nextAction = &stateActions.actions[i];
 		maxQuality = calculateExp(stateActions.actions[i].quality)/sigma*100;
 		sum+= maxQuality;
